@@ -2,6 +2,7 @@ import pyaudio
 import numpy as np
 from numpy.linalg import norm
 from numpy.fft import fft
+from numpy.fft import rfft
 from scipy import signal
 import matplotlib.pyplot as plt
 
@@ -37,11 +38,10 @@ while True:
 
     print(norm(data))
   except KeyboardInterrupt:
+    # TODO: Step (3) close stream
+    controller.close(audio_stream)
+    controller.terminate()
     break
 
 print('\nShutting down')
-
-# TODO: Step (3) close stream
-controller.close(audio_stream)
-controller.terminate()
 
