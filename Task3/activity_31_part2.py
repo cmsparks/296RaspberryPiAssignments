@@ -1,6 +1,7 @@
 import pyaudio
 import numpy as np
 from numpy.linalg import norm
+from scipy import signal
 
 FORMAT = pyaudio.paInt16
 CHANNELS = 1
@@ -17,6 +18,9 @@ while True:
     # TODO: Step (2) read from stream
     stream_data = audio_stream.read(FRAMES_PER_BUFFER) # <-- TODO: Change this!
     data = np.fromstring(stream_data, dtype=np.int16).astype(np.float32)
+    # Hamming filter
+    hamming = signal.hamming(4096)
+    data = np.multiply(hamming, data)
     print(norm(data))
   except KeyboardInterrupt:
     break

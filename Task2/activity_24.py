@@ -17,7 +17,12 @@ def get_bit_stream(rate=44100, lambdah=1879.69, duration=3):
 bit_stream = get_bit_stream()
 # TODO: write the bitstream to file.
 # Your code here.
+FORMAT = pyaudio.paInt16
+CHANNELS = 1
+RATE = 44100
+FRAMES_PER_BUFFER = 4096
+
 controller = pyaudio.PyAudio()
-audio_stream = controller.open()
+audio_stream = controller.open(RATE, CHANNELS, FORMAT, output=True)
 audio_stream.write(bit_stream)
 audio_stream.stop_stream()
